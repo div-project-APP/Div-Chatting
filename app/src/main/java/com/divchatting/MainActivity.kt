@@ -1,4 +1,4 @@
-package com.Div-Chatting
+package com.divchatting
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
