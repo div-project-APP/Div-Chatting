@@ -1,4 +1,4 @@
-name: Build APK
+name: Build APK with Firebase
 
 on:
   push:
@@ -9,17 +9,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout repo
       - uses: actions/checkout@v3
 
+      # 2️⃣ Setup JDK 17
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
 
-      - name: Build APK
-        run: ./gradlew assembleRelease
+      # 3️⃣ Buat google-services.json dari secret
+      - name: Setup Firebase Config
+        run: |
+          mkdir -p app
+          echo "${{ secrets.GOOGLE_SERVICES_JSON }}" > app/google-services.json
 
+      # 4️⃣ Beri permission ke gradlew
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # 5️⃣ Build APK release
+      - name: Build APK
+        run: ./gradlew clean assembleRelease
+
+      # 6️⃣ Upload hasil APK sebagai artifact
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
