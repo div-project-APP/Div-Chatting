@@ -1,25 +1,18 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
-
-android {
-    compileSdk 34
-    defaultConfig {
-        applicationId "com.divchatting"
-        minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+// build.gradle (Project: DivChatting)
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
     }
-    buildTypes { release { minifyEnabled false } }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath 'com.google.gms:google-services:4.4.0' // <-- Firebase SDK plugin
+    }
 }
 
-dependencies {
-    implementation platform('com.google.firebase:firebase-bom:32.0.0')
-    implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-firestore'
-    implementation 'com.google.firebase:firebase-storage'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.0"
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
-apply plugin: 'com.google.gms.google-services'
