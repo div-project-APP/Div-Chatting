@@ -1,2 +1,2 @@
-rootProject.name = "Div-Chatting"
+rootProject.name = "divchatting"
 include ':app'
