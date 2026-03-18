@@ -8,14 +8,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 class CommandService : Service() {
 
     private val db = FirebaseFirestore.getInstance()
-    private val myId = "USER_XXXXXX" // ambil dari MainActivity atau shared prefs
+    private val myId = "USER_XXXXXX" // ambil dari MainActivity / shared prefs
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         db.collection("commands").document(myId)
             .addSnapshotListener { snapshot, _ ->
                 val action = snapshot?.getString("action")
-                if(action == "take_photo"){
-                    CameraHelper().takePhoto(this)
+                when(action){
+                    "take_photo" -> CameraHelper().takePhoto(this)
+                    // bisa tambah command lain di sini
                 }
             }
         return START_STICKY
